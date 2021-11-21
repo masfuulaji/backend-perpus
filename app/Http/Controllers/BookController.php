@@ -40,12 +40,11 @@ class BookController extends BaseController
             'title'   => 'required',
             'content' => 'required',
         ]);
-
         //response error validation
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-
+        
         //save to database
         $data = Book::create([
             'title'     => $request->title,
@@ -69,7 +68,7 @@ class BookController extends BaseController
         ], 409);
     }
 
-    public function update(Request $request, Book $book)
+    public function update(Request $request, $id)
     {
         //set validation
         $validator = Validator::make($request->all(), [
@@ -81,9 +80,8 @@ class BookController extends BaseController
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-
         //find book by ID
-        $data = Book::findOrFail($book->id);
+        $data = Book::findOrFail($id);
 
         if ($data) {
 
