@@ -20,6 +20,8 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+$router->post('/api/login','AuthController@login');
+
 $router->get('/book', 'BookController@index');
 $router->post('/book', 'BookController@store');
 $router->get('/book/{id}', 'BookController@show');
